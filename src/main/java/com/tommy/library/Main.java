@@ -8,7 +8,7 @@ public class Main {
     public static void main(String[] args) {
 
         SessionFactory factory = new Configuration()
-                .configure("hibernate.cfg22xml")
+                .configure("hibernate.cfg.xml")
                 .addAnnotatedClass(User.class)
                 .buildSessionFactory();
 
