@@ -1,16 +1,15 @@
 ✅ Завдання 2 — Save (CREATE)
 📚 Теорія
 
-EntityManager.persist() або repository.save()
+session.save()
 
 📋 Завдання
 
 Створи метод:
 
 void saveUser(User user)
-
 який додає користувача в БД.
 
 💡 Підказка
 транзакція обов’язкова
-entityManager.persist(user)
+session.save(book);
