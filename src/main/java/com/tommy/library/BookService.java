@@ -3,6 +3,8 @@ package com.tommy.library;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
+import java.util.List;
+
 public class BookService {
 
     private final SessionFactory sessionFactory = HibernateUtil.getFactory();
@@ -22,5 +24,11 @@ public class BookService {
         return book;
     }
 
-
+    public List<Book> getAll (){
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        List <Book> list = session.createQuery("From Book", Book.class).getResultList();
+        session.getTransaction().commit();
+        return list;
+    }
 }
