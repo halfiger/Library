@@ -1,9 +1,9 @@
 package com.tommy.library;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
+@Entity
+@Table(name="books")
 public class Book {
 
     @Id
