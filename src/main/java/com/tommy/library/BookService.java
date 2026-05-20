@@ -5,16 +5,22 @@ import org.hibernate.SessionFactory;
 
 public class BookService {
 
-    SessionFactory sessionFactory = HibernateUtil.getFactory();
+    private final SessionFactory sessionFactory = HibernateUtil.getFactory();
 
-    public Book saveBook () {
+    public void saveBook (Book book) {
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
-        Book book = new Book("mumu", "bubu", 2);
         session.save(book);
         session.getTransaction().commit();
-        return book;
-
     }
+
+    public Book getBookById (Long id) {
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        Book book = session.get(Book.class, id);
+        session.getTransaction().commit();
+        return book;
+    }
+
 
 }
