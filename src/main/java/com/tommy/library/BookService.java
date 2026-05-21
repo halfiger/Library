@@ -31,4 +31,20 @@ public class BookService {
         session.getTransaction().commit();
         return list;
     }
+
+    public List <Book> getMuchPagesThen (int n) {
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        List <Book> list = session.createQuery("From Book b where b.pages > :n", Book.class).setParameter("n", n).getResultList();
+        session.getTransaction().commit();
+        return list;
+    }
+
+    public List <Book> pagination (int page, int size) {
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        List <Book> list = session.createQuery("from Book b order by b.id", Book.class).setFirstResult(page*size).setMaxResults(size).getResultList();
+        session.getTransaction().commit();
+        return list;
+    }
 }

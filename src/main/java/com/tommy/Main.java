@@ -22,14 +22,29 @@ public class Main {
 //            System.out.println(book2);
 //        }
 //        4
-        List<Book> list = bookService.getAll();
-        System.out.println(list.toString());
+//        List<Book> list = bookService.getAll();
+//        System.out.println(list.toString());
+//        for (Book b : list) {
+//            if (b != null) {
+//                System.out.println(b);
+//            }
+//        }
+
+//        5
+//        List <Book> list = bookService.getMuchPagesThen(6);
+//        for (Book b : list) {
+//            if (b != null) {
+//                System.out.println(b);
+//            }
+//        }
+
+//        6
+
+        List <Book> list = bookService.pagination(1,1);
         for (Book b : list) {
             if (b != null) {
                 System.out.println(b);
             }
         }
-
-
     }
 }
