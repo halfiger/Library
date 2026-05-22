@@ -14,6 +14,13 @@ void saveUser(User user)
 транзакція обов’язкова
 session.save(book);
 
+        CREATE TABLE my_db.books (
+        id BIGINT PRIMARY KEY AUTO_INCREMENT,
+        name VARCHAR(100),
+        autor VARCHAR(100),
+        pages INT
+        );
+
         bookService.saveBook(new Book("Ulysses", "James Joyce", 441));
         bookService.saveBook(new Book("The Great Gatsby", "F. Scott Fitzgerald", 341));
         bookService.saveBook(new Book("The Catcher in the Rye", "J. D. Salinger", 452));
@@ -31,3 +38,4 @@ session.save(book);
         bookService.saveBook(new Book("The Stranger", "Albert Camus", 234));
         bookService.saveBook(new Book("The Odyssey", "Homer", 187));
         bookService.saveBook(new Book("The Magic Mountain", "Thomas Mann", 329));
+
