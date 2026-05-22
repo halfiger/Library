@@ -40,11 +40,23 @@ public class Main {
 
 //        6
 
-        List <Book> list = bookService.pagination(1,1);
-        for (Book b : list) {
-            if (b != null) {
-                System.out.println(b);
-            }
-        }
+//        List <Book> list = bookService.pagination(1,1);
+//        for (Book b : list) {
+//            if (b != null) {
+//                System.out.println(b);
+//            }
+//        }
+
+//        7
+
+//        bookService.updateUserName(2L, "The Odyssey by Homer");
+//        bookService.updateUserName(1L, "The Magic Mountain by Thomas Mann");
+
+//        8
+        bookService.updateBookName(2L,"The Odyssey ");
+        bookService.updateBookAutor(2L, "Homer ");
+
+        bookService.updateBookName(1L,"The Magic Mountain ");
+        bookService.updateBookAutor(1L, "Thomas Mann ");
     }
 }

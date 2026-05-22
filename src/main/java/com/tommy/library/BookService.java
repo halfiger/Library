@@ -48,16 +48,24 @@ public class BookService {
         return list;
     }
 
-    public void updateUserName(Long id, String newName) {
+    public void updateBookName(Long id, String newName) {
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
-        Book book = session.get(Book.class, 2L);
+        Book book = session.get(Book.class, id);
         if (book != null) {
             book.setName(newName);
         }
         session.getTransaction().commit();
     }
 
-
+    public void updateBookAutor (Long id, String newAutor) {
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        Book book = session.get(Book.class, id);
+        if (book != null) {
+            book.setAutor(newAutor);
+        }
+        session.getTransaction().commit();
+    }
 
 }
