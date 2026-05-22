@@ -46,17 +46,19 @@ public class Main {
 //                System.out.println(b);
 //            }
 //        }
-
 //        7
-
 //        bookService.updateUserName(2L, "The Odyssey by Homer");
 //        bookService.updateUserName(1L, "The Magic Mountain by Thomas Mann");
-
 //        8
-        bookService.updateBookName(2L,"The Odyssey ");
-        bookService.updateBookAutor(2L, "Homer ");
-
-        bookService.updateBookName(1L,"The Magic Mountain ");
-        bookService.updateBookAutor(1L, "Thomas Mann ");
+//        bookService.updateBookName(2L,"The Odyssey ");
+//        bookService.updateBookAutor(2L, "Homer ");
+//        bookService.updateBookName(1L,"The Magic Mountain ");
+//        bookService.updateBookAutor(1L, "Thomas Mann ");
+//        9
+//        bookService.deleteById(18L);
+//        bookService.deleteById(19L);
+//        10
+//        System.out.println(bookService.findByBookName("Ulysses").toString());
+//
     }
 }

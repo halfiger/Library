@@ -68,4 +68,26 @@ public class BookService {
         session.getTransaction().commit();
     }
 
+    public void deleteById (Long id) {
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        Book book = session.get(Book.class, id);
+        if (book != null) {
+            session.remove(book);
+        }
+        session.getTransaction().commit();
+    }
+
+    public Book findByBookName (String bookName) {
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        Book book = session.createQuery(
+                "From Book b where b.name = :bookName", Book.class
+        ).setParameter("bookName", bookName).getSingleResult();
+        session.getTransaction().commit();
+        return book;
+    }
+
+
+
 }
