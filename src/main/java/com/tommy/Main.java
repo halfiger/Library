@@ -60,5 +60,14 @@ public class Main {
 //        10
 //        System.out.println(bookService.findByBookName("Ulysses").toString());
 //
+
+
+//        11
+          List <Book> list = bookService.findByPartOfBookName("re");
+        for (Book b : list) {
+            if (b != null) {
+                System.out.println(b);
+            }
+        }
     }
 }

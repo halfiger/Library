@@ -88,6 +88,15 @@ public class BookService {
         return book;
     }
 
+    public List <Book> findByPartOfBookName (String part) {
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        List <Book> list = session
+                .createQuery("From Book b where b.name like :part", Book.class)
+                .setParameter("part", "%"+part+"%").getResultList();
+        session.getTransaction().commit();
+        return list;
+    }
 
 
 }
