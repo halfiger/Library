@@ -1,0 +1,205 @@
+12 --
+
+
+Добре, це буде дуже правильний місток перед relations 👍
+Бо якщо одразу піти в @OneToMany, а:
+
+filters,
+sorting,
+query logic
+
+ще “плавають”, то Hibernate почне виглядати як хаос.
+
+Тому зробимо маленький блок:
+
+CRUD+
+🔥 1. SORTING
+📌 Завдання
+Метод:
+findAllSortedByAge()
+Умова
+
+Повернути всіх користувачів:
+
+від молодших до старших.
+🧠 Що треба використати
+ORDER BY
+⚠️ Спробуй сам
+✅ Приблизне рішення
+public List<User> findAllSortedByAge() {
+
+    Session session = factory.getCurrentSession();
+
+    session.beginTransaction();
+
+    List<User> users = session
+            .createQuery(
+                    "FROM User u ORDER BY u.age",
+                    User.class
+            )
+            .getResultList();
+
+    session.getTransaction().commit();
+
+    return users;
+}
+🔥 Додатково
+Спробуй сам:
+DESC
+сортування по name
+ORDER BY age DESC, name ASC
+⚠️ Це буде дуже часто в реальних API
+🔥 2. DYNAMIC FILTERS
+📌 Завдання
+Метод:
+findUsersOlderThan(int age)
+Умова
+
+Повернути:
+
+усіх користувачів старших за age
+🧠 Тут уже:
+WHERE
+parameter
+comparison
+✅ Рішення
+public List<User> findUsersOlderThan(int age) {
+
+    Session session = factory.getCurrentSession();
+
+    session.beginTransaction();
+
+    List<User> users = session
+            .createQuery(
+                    "FROM User u WHERE u.age > :age",
+                    User.class
+            )
+            .setParameter("age", age)
+            .getResultList();
+
+    session.getTransaction().commit();
+
+    return users;
+}
+🔥 Далі сам спробуй
+findUsersBetweenAge(min, max)
+Підказка
+BETWEEN
+Або:
+u.age >= :min AND u.age <= :max
+🔥 3. AGGREGATE FUNCTIONS
+
+Оце вже дуже важлива SQL/JPQL тема.
+
+📌 Завдання
+Метод:
+countUsers()
+🧠 Треба:
+COUNT
+⚠️ І тут новий момент
+
+Повертається:
+
+Long
+✅ Рішення
+public Long countUsers() {
+
+    Session session = factory.getCurrentSession();
+
+    session.beginTransaction();
+
+    Long count = session
+            .createQuery(
+                    "SELECT COUNT(u) FROM User u",
+                    Long.class
+            )
+            .getSingleResult();
+
+    session.getTransaction().commit();
+
+    return count;
+}
+🔥 Наступні самостійно
+averageAge()
+Підказка
+AVG
+⚠️ AVG повертає:
+Double
+🔥 Ще:
+maxAge()
+MAX
+minAge()
+MIN
+🧠 Це вже прям SQL-core речі
+🔥 4. DTO (дуже корисно)
+
+Оце вже ближче до реального backend.
+
+🧠 Ідея DTO
+
+Іноді НЕ треба повертати:
+
+весь User
+Наприклад:
+тільки name + email
+🔥 Створити клас
+UserInfoDTO
+private String name;
+private String email;
++ constructor
++ toString
+  📌 Завдання
+  Метод:
+  findAllUserInfo()
+  ⚠️ Тут новий синтаксис JPQL
+  ✅ Рішення
+  public List<UserInfoDTO> findAllUserInfo() {
+
+  Session session = factory.getCurrentSession();
+
+  session.beginTransaction();
+
+  List<UserInfoDTO> list = session
+  .createQuery(
+  "SELECT new org.entity.practice1.UserInfoDTO(u.name, u.email) FROM User u",
+  UserInfoDTO.class
+  )
+  .getResultList();
+
+  session.getTransaction().commit();
+
+  return list;
+  }
+  🧠 Оце:
+  new org.entity.practice1.UserInfoDTO(...)
+
+це:
+
+JPQL constructor expression
+⚠️ І це вже реально важлива тема
+
+Бо:
+
+REST API
+responses
+projections
+
+усюди DTO.
+
+🔥 Що з цього НАЙВАЖЛИВІШЕ
+= VERY IMPORTANT
+1.
+WHERE + setParameter
+2.
+ORDER BY
+3.
+COUNT / AVG / aggregate functions
+4.
+DTO projection
+⚠️ DTO поки можна не ідеально зрозуміти
+
+Але:
+
+constructor projection
+
+дуже бажано побачити хоча б раз.
