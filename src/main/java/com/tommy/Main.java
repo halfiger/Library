@@ -68,11 +68,21 @@ public class Main {
 //            }
 //        }
 
-        List <Book> list = bookService.allSortedByPages();
+//        List <Book> list = bookService.allSortedByPages();
+//        for (Book b : list) {
+//            if (b != null) {
+//                System.out.println(b);
+//            }
+//        }
+
+        List <Book> list = bookService.getAllMorePages(333);
         for (Book b : list) {
             if (b != null) {
                 System.out.println(b);
             }
         }
+
+
+
     }
 }
