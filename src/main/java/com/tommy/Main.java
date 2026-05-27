@@ -1,6 +1,7 @@
 package com.tommy;
 
 import com.tommy.library.Book;
+import com.tommy.library.BookInfoDTO;
 import com.tommy.library.BookService;
 
 import java.util.List;
@@ -75,14 +76,23 @@ public class Main {
 //            }
 //        }
 
-        List <Book> list = bookService.getAllMorePages(333, 555);
-        for (Book b : list) {
-            if (b != null) {
+//        List <Book> list = bookService.getAllMorePages(333, 555);
+//        for (Book b : list) {
+//            if (b != null) {
+//                System.out.println(b);
+//            }
+//        }
+
+//        System.out.println(bookService.countBooks());
+//        System.out.println(bookService.getAverageValueOfPages());
+//        System.out.println(bookService.getMaxPagesValue());
+//        System.out.println(bookService.getMinPagesValue());
+
+        List <BookInfoDTO> list = bookService.findAllUserInfo();
+        for (BookInfoDTO b : list) {
+            if (b!=null) {
                 System.out.println(b);
             }
         }
-
-
-
     }
 }

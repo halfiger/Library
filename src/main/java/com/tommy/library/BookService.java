@@ -58,17 +58,17 @@ public class BookService {
         session.getTransaction().commit();
     }
 
-    public void updateBookAutor (Long id, String newAutor) {
+    public void updateBookAutor(Long id, String newAutor) {
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
         Book book = session.get(Book.class, id);
         if (book != null) {
-            book.setAutor(newAutor);
+            book.setAuthor(newAutor);
         }
         session.getTransaction().commit();
     }
 
-    public void deleteById (Long id) {
+    public void deleteById(Long id) {
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
         Book book = session.get(Book.class, id);
@@ -78,7 +78,7 @@ public class BookService {
         session.getTransaction().commit();
     }
 
-    public Book findByBookName (String bookName) {
+    public Book findByBookName(String bookName) {
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
         Book book = session.createQuery(
@@ -88,28 +88,28 @@ public class BookService {
         return book;
     }
 
-    public List <Book> findByPartOfBookName (String part) {
+    public List<Book> findByPartOfBookName(String part) {
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
-        List <Book> list = session
+        List<Book> list = session
                 .createQuery("From Book b where b.name like :part", Book.class)
-                .setParameter("part", "%"+part+"%").getResultList();
+                .setParameter("part", "%" + part + "%").getResultList();
         session.getTransaction().commit();
         return list;
     }
 
-    public List <Book> allSortedByPages () {
+    public List<Book> allSortedByPages() {
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
-        List <Book> list = session.createQuery("from Book b order by b.pages desc", Book.class).getResultList();
-    session.getTransaction().commit();
-    return list;
+        List<Book> list = session.createQuery("from Book b order by b.pages desc", Book.class).getResultList();
+        session.getTransaction().commit();
+        return list;
     }
 
-    public List <Book> getAllMorePages (int pa, int ges) {
+    public List<Book> getAllMorePages(int pa, int ges) {
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
-        List <Book> list = session.createQuery("from Book b where b.pages > :pa and b.pages < :ges", Book.class)
+        List<Book> list = session.createQuery("from Book b where b.pages > :pa and b.pages < :ges", Book.class)
                 .setParameter("pa", pa)
                 .setParameter("ges", ges)
                 .getResultList();
@@ -117,5 +117,46 @@ public class BookService {
         return list;
     }
 
+    public Long countBooks() {
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        Long count = session.createQuery("SELECT COUNT(b) FROM Book b", Long.class).getSingleResult();
+        session.getTransaction().commit();
+        return count;
+    }
+
+    public Double getAverageValueOfPages() {
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        Double avgValue = session.createQuery("SELECT AVG(b.pages) FROM Book b", Double.class).getSingleResult();
+        session.getTransaction().commit();
+        return avgValue;
+    }
+
+    public Integer getMaxPagesValue () {
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        Integer maxValue = session.createQuery("SELECT MAX(b.pages) FROM Book b", Integer.class).getSingleResult();
+        session.getTransaction().commit();
+        return maxValue;
+    }
+
+    public Integer getMinPagesValue () {
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        Integer minValue = session.createQuery("SELECT MIN(b.pages) FROM Book b", Integer.class).getSingleResult();
+        session.getTransaction().commit();
+        return minValue;
+    }
+
+    public List <BookInfoDTO> findAllUserInfo () {
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        List <BookInfoDTO> list = session
+                .createQuery("SELECT new com.tommy.library.BookInfoDTO(b.name, b.autor) FROM Book b", BookInfoDTO.class)
+                .getResultList();
+        session.getTransaction().commit();
+        return list;
+    }
 
 }

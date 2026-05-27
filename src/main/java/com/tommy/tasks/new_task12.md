@@ -102,8 +102,8 @@ COUNT
 ⚠️ І тут новий момент
 
 Повертається:
-
 Long
+
 ✅ Рішення
 public Long countUsers() {
 
@@ -134,6 +134,9 @@ MAX
 minAge()
 MIN
 🧠 Це вже прям SQL-core речі
+
+
+----------------------------------
 🔥 4. DTO (дуже корисно)
 
 Оце вже ближче до реального backend.
@@ -151,6 +154,8 @@ private String name;
 private String email;
 + constructor
 + toString
+
+
   📌 Завдання
   Метод:
   findAllUserInfo()

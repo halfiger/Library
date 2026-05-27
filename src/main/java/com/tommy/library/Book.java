@@ -33,12 +33,12 @@ public class Book {
         this.name = name;
     }
 
-    public String getAutor() {
+    public String getAuthor() {
         return autor;
     }
 
-    public void setAutor(String autor) {
-        this.autor = autor;
+    public void setAuthor(String author) {
+        this.autor = author;
     }
 
     public int getPages() {
