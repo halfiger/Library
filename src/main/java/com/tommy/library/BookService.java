@@ -106,10 +106,13 @@ public class BookService {
     return list;
     }
 
-    public List <Book> getAllMorePages (int pages) {
+    public List <Book> getAllMorePages (int pa, int ges) {
         Session session = sessionFactory.getCurrentSession();
         session.beginTransaction();
-        List <Book> list = session.createQuery("from Book b where b.pages > :pages", Book.class).setParameter("pages", pages).getResultList();
+        List <Book> list = session.createQuery("from Book b where b.pages > :pa and b.pages < :ges", Book.class)
+                .setParameter("pa", pa)
+                .setParameter("ges", ges)
+                .getResultList();
         session.getTransaction().commit();
         return list;
     }

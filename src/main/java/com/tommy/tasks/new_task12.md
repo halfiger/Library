@@ -88,6 +88,8 @@ findUsersBetweenAge(min, max)
 BETWEEN
 Або:
 u.age >= :min AND u.age <= :max
+
+------------------------
 🔥 3. AGGREGATE FUNCTIONS
 
 Оце вже дуже важлива SQL/JPQL тема.
