@@ -98,5 +98,15 @@ public class BookService {
         return list;
     }
 
+    public List <Book> allSortedByPages () {
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        List <Book> list = session.createQuery("from Book b order by b.pages desc", Book.class).getResultList();
+    session.getTransaction().commit();
+    return list;
+    }
+
+
+
 
 }
